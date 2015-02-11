@@ -1,10 +1,12 @@
 # AURIN_EmpBasemapGen
+
 Historical Employment Basemap Generator
+The purpose for these R scripts is to generate historical employment basemaps which can be used in the ARUIN Industry Clustering Tool(see more detail here http://docs.aurin.org.au/tutorials-and-use-cases/analysing-industry-clustering/)
 
 PART1 - Installation and configuration
-1. The provided R scripts are tested in R (X64 3.1.1), RStudio (0.98.1056) on Windows 7 Enterprise (64bit), 
+1. The provided R scripts are tested in R (X64 3.1.1), RStudio (0.98.1056) on Windows 7 Enterprise (64bit)
 2. Users need to change the "working directory" to their own data directory
-3. The data sets for running the scripts are specifically designed and prepared and NOT included in this repo due to the giant file size. Please contact Dr Benny Chen (yiqun.c@unimelb.edu.au) and Dr Jennifer Day (jday@unimelb.edu.au) for more information.
+3. The data sets for running the scripts are specifically designed and prepared and NOT included in this repo due to the giant file size. Please contact Dr Benny Chen (yiqun.c@unimelb.edu.au) and Dr Jennifer Day (jday@unimelb.edu.au) for more information
 
 
 PART2 - How to prepare basemap (example using 2006 VIC DZN and Planning Zone data sets)
