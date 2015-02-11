@@ -140,6 +140,65 @@ f_datamerge_2011_NSW <- function(){
   writeOGR(obj=empPolyRawDataFrame, dsn="NSW\\2011", layer="DZN_X_Employment_2011_NSW_Orginal", driver="ESRI Shapefile", check_exists=TRUE, overwrite_layer=TRUE)
 }
 
+f_create_metadata <- function(){
+  curDiv1Code = ""
+  curDiv2Code = ""
+  curDiv3Code = ""
+  for(i in 1:nrow(div4)){
+    
+    if(curDiv1Code != div4[i,"Div1Code"]){
+      curDiv1Code = div4[i,"Div1Code"]
+      #find the Div1Name of div1
+      curDiv1Name = ""
+      for(j in 1:nrow(div1)){
+        
+        if(curDiv1Code == div1[j,"Div1Code"]){
+          curDiv1Name = div1[j,"Div1Name"]
+          
+          print(sprintf("<attr><attrlabl Sync='TRUE'>%s000</attrlabl><attalias Sync='TRUE'>%s</attalias>####</attr>", curDiv1Code, curDiv1Name))
+          
+          break
+        }
+      }
+    }
+    
+    if(curDiv2Code != div4[i,"Div2Code"]){
+      curDiv2Code = div4[i,"Div2Code"]
+      #find the Div2Name of div2
+      curDiv2Name = ""
+      for(j in 1:nrow(div2)){
+        
+        if(curDiv2Code == div2[j,"Div2Code"]){
+          curDiv2Name = div2[j,"Div2Name"]
+          
+          print(sprintf("<attr><attrlabl Sync='TRUE'>X%s00</attrlabl><attalias Sync='TRUE'>%s</attalias>####</attr>", curDiv2Code, curDiv2Name))
+          
+          break
+        }
+      }
+    }
+    
+    if(curDiv3Code != div4[i,"Div3Code"]){
+      curDiv3Code = div4[i,"Div3Code"]
+      #find the Div3Name of div3
+      curDiv3Name = ""
+      for(j in 1:nrow(div3)){
+        
+        if(curDiv3Code == div3[j,"Div3Code"]){
+          curDiv3Name = div3[j,"Div3Name"]
+          if(sprintf("X%s0", curDiv3Code) != sprintf("X%s00", curDiv2Code)){
+            print(sprintf("<attr><attrlabl Sync='TRUE'>X%s0</attrlabl><attalias Sync='TRUE'>%s</attalias>####</attr>", curDiv3Code, curDiv3Name))
+          }
+          break
+        }
+      }
+    }
+    if(sprintf("X%s", div4[i,"Div4Code"]) != sprintf("X%s0", curDiv3Code)){
+      print(sprintf("<attr><attrlabl Sync='TRUE'>X%s</attrlabl><attalias Sync='TRUE'>%s</attalias>####</attr>", div4[i,"Div4Code"], div4[i,"Div4Name"]))
+    }
+  }
+  
+}
 
 # based on Sophie's work, parsing the summarized "jobdivision-zonecode" table into 4 tables, which contains the "jobdivision-zonecode" relationship on each of 4 jobdivision levels respectively. 
 f_parse_divzonecode <- function(){
